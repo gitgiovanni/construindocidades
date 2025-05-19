@@ -4,134 +4,274 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Construindo Cidades - Galeria</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
 
-        body {
-            background: #f0f0f0;
-        }
+    body {
+        background: #f0f0f0;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin: 2rem 0;
-            font-size: 2.5rem;
-        }
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin: 2rem 0;
+        font-size: 2.5rem;
+    }
 
-        /* Estilos da Galeria */
-        .slideshow-container {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+    /* Estilos da Galeria */
+    .slideshow-container {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
 
+    .slideshow-inner {
+        position: relative;
+        height: 70vh;
+    }
+
+    .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+    }
+
+    .slide.active {
+        opacity: 1;
+    }
+
+    .slide-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .slideshow-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: white;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: 0.3s;
+        z-index: 2;
+    }
+
+    .slideshow-prev { left: 0; }
+    .slideshow-next { right: 0; }
+
+    .slideshow-nav:hover {
+        background: rgba(0,0,0,0.8);
+    }
+
+    .slideshow-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 2;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .dot.active {
+        background: #e67e22;
+        transform: scale(1.2);
+    }
+
+    .iframe-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
+        width: 100%;
+    }
+
+    iframe {
+        width: 600px;
+        height: 450px;
+        border: 0;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
         .slideshow-inner {
-            position: relative;
-            height: 70vh;
+            height: 50vh;
         }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        .slide.active {
-            opacity: 1;
-        }
-
-        .slide-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        
         .slideshow-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: 0.3s;
+            padding: 10px;
+            font-size: 1rem;
         }
 
-        .slideshow-prev { left: 0; }
-        .slideshow-next { right: 0; }
-
-        .slideshow-nav:hover {
-            background: rgba(0,0,0,0.8);
+        iframe {
+            width: 100%;
+            height: 300px;
         }
-
-        .slideshow-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .dot.active {
-            background: #e67e22;
-            transform: scale(1.2);
-        }
-
-        @media (max-width: 768px) {
-            .slideshow-inner {
-                height: 50vh;
-            }
-            
-            .slideshow-nav {
-                padding: 10px;
-                font-size: 1rem;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <div class="container">
         <h1>Construindo Cidades - Eng. Computação/Software</h1>
         
-        <!-- Galeria -->
+        <!-- Galeria com lazy loading -->
         <div class="slideshow-container">
             <div class="slideshow-inner">
-                <!-- Adicione suas imagens aqui -->
-                <div class="slide active">
-                    <img src="img1.jpg" class="slide-image" alt="Projeto 1">
-                </div>
-                <div class="slide">
-                    <img src="/img2.jpg" class="slide-image" alt="Projeto 2">
-                </div>
-                <div class="slide">
-                    <img src="/img3.jpg" class="slide-image" alt="Projeto 3">
-                </div>
+                <!-- Slides corrigidos e com lazy loading -->
+<div class="slide active">
+    <img data-src="img1.jpg" class="slide-image" alt="Projeto 1">
+</div>
+<div class="slide">
+    <img data-src="img2.jpg" class="slide-image" alt="Projeto 2">
+</div>
+<div class="slide">
+    <img data-src="img3.jpg" class="slide-image" alt="Projeto 3">
+</div>
+<div class="slide">
+    <img data-src="img4.jpg" class="slide-image" alt="Projeto 4">
+</div>
+<div class="slide">
+    <img data-src="img5.jpg" class="slide-image" alt="Projeto 5">
+</div>
+<div class="slide">
+    <img data-src="img6.jpg" class="slide-image" alt="Projeto 6">
+</div>
+<div class="slide">
+    <img data-src="img7.jpg" class="slide-image" alt="Projeto 7">
+</div>
+<div class="slide">
+    <img data-src="img8.jpg" class="slide-image" alt="Projeto 8">
+</div>
+<div class="slide">
+    <img data-src="img9.jpg" class="slide-image" alt="Projeto 9">
+</div>
+<div class="slide">
+    <img data-src="img10.jpg" class="slide-image" alt="Projeto 10">
+</div>
+<div class="slide">
+    <img data-src="img11.jpg" class="slide-image" alt="Projeto 11">
+</div>
+<div class="slide">
+    <img data-src="img12.jpg" class="slide-image" alt="Projeto 12">
+</div>
+<div class="slide">
+    <img data-src="img13.jpg" class="slide-image" alt="Projeto 13">
+</div>
+<div class="slide">
+    <img data-src="img14.jpg" class="slide-image" alt="Projeto 14">
+</div>
+<div class="slide">
+    <img data-src="img15.jpg" class="slide-image" alt="Projeto 15">
+</div>
+<div class="slide">
+    <img data-src="img16.jpg" class="slide-image" alt="Projeto 16">
+</div>
+<div class="slide">
+    <img data-src="img17.jpg" class="slide-image" alt="Projeto 17">
+</div>
+<div class="slide">
+    <img data-src="img18.jpg" class="slide-image" alt="Projeto 18">
+</div>
+<div class="slide">
+    <img data-src="img19.jpg" class="slide-image" alt="Projeto 19">
+</div>
+<div class="slide">
+    <img data-src="img20.jpg" class="slide-image" alt="Projeto 20">
+</div>
+<div class="slide">
+    <img data-src="img21.jpg" class="slide-image" alt="Projeto 21">
+</div>
+<div class="slide">
+    <img data-src="img22.jpg" class="slide-image" alt="Projeto 22">
+</div>
+<div class="slide">
+    <img data-src="img23.jpg" class="slide-image" alt="Projeto 23">
+</div>
+<div class="slide">
+    <img data-src="img24.jpg" class="slide-image" alt="Projeto 24">
+</div>
+<div class="slide">
+    <img data-src="img25.jpg" class="slide-image" alt="Projeto 25">
+</div>
+<div class="slide">
+    <img data-src="img26.jpg" class="slide-image" alt="Projeto 26">
+</div>
+<div class="slide">
+    <img data-src="img27.jpg" class="slide-image" alt="Projeto 27">
+</div>
+<div class="slide">
+    <img data-src="img28.jpg" class="slide-image" alt="Projeto 28">
+</div>
+<div class="slide">
+    <img data-src="img29.jpg" class="slide-image" alt="Projeto 29">
+</div>
+<div class="slide">
+    <img data-src="img30.jpg" class="slide-image" alt="Projeto 30">
+</div>
+<div class="slide">
+    <img data-src="img31.jpg" class="slide-image" alt="Projeto 31">
+</div>
+<div class="slide">
+    <img data-src="img32.jpg" class="slide-image" alt="Projeto 32">
+</div>
+<div class="slide">
+    <img data-src="img33.jpg" class="slide-image" alt="Projeto 33">
+</div>
+<div class="slide">
+    <img data-src="img34.jpg" class="slide-image" alt="Projeto 34">
+</div>
+<div class="slide">
+    <img data-src="img35.jpg" class="slide-image" alt="Projeto 35">
+</div>
+<div class="slide">
+    <img data-src="img36.jpg" class="slide-image" alt="Projeto 36">
+</div>
+<div class="slide">
+    <img data-src="img37.jpg" class="slide-image" alt="Projeto 37">
+</div>
+<div class="slide">
+    <img data-src="img38.jpg" class="slide-image" alt="Projeto 38">
+</div>
+<div class="slide">
+    <img data-src="img39.jpg" class="slide-image" alt="Projeto 39">
+</div>
+<div class="slide">
+    <img data-src="img40.jpg" class="slide-image" alt="Projeto 40">
+</div>
+<div class="slide">
+    <img data-src="img41.jpg" class="slide-image" alt="Projeto 41">
+</div>
+<div class="slide">
+    <img data-src="img42.jpg" class="slide-image" alt="Projeto 42">
+</div>
+               
                 
                 <button class="slideshow-nav slideshow-prev">❮</button>
                 <button class="slideshow-nav slideshow-next">❯</button>
@@ -139,49 +279,130 @@
                 <div class="slideshow-dots"></div>
             </div>
         </div>
-        <iframe src="https://www.google.com/maps/embed?pb=!4v1747694251342!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREdwTEtJQmc.!2m2!1d-23.549961316668!2d-46.64915989497705!3f100.06136175360433!4f0!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" margin-right="20px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+        <!-- Iframe centralizado e responsivo -->
+        <div class="iframe-wrapper">
+            <iframe src="https://www.google.com/maps/embed?pb=!4v1747694251342!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREdwTEtJQmc.!2m2!1d-23.549961316668!2d-46.64915989497705!3f100.06136175360433!4f0!5f0.7820865974627469" 
+                    width="600" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
     </div>
-  
-    <script>
-        // Configuração da Galeria
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.querySelector('.slideshow-dots');
-        let currentSlide = 0;
 
-        // Cria os dots de navegação
+<script>
+    // Configuração da Galeria
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.querySelector('.slideshow-dots');
+    let currentSlide = 0;
+    let autoSlideInterval;
+    let isUserInteracting = false;
+
+    // Inicializar dots
+    function initDots() {
+        dotsContainer.innerHTML = '';
         slides.forEach((_, index) => {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
+            dot.addEventListener('click', () => {
+                isUserInteracting = true;
+                clearInterval(autoSlideInterval);
+                goToSlide(index);
+                startAutoSlide();
+            });
             dotsContainer.appendChild(dot);
         });
+    }
 
-        // Função de navegação
-        function goToSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            dotsContainer.children[currentSlide].classList.remove('active');
-            
-            currentSlide = (n + slides.length) % slides.length;
-            
-            slides[currentSlide].classList.add('active');
-            dotsContainer.children[currentSlide].classList.add('active');
+    // Função de navegação com lazy loading
+    function goToSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        dotsContainer.children[currentSlide].classList.remove('active');
+        
+        currentSlide = (n + slides.length) % slides.length;
+        const activeSlide = slides[currentSlide];
+        const img = activeSlide.querySelector('img');
+        
+        // Carregar imagem apenas quando necessário
+        if (img.dataset.src && !img.src) {
+            img.src = img.dataset.src;
+            img.onload = () => {
+                img.style.opacity = 1;
+            };
+            img.style.opacity = 0;
+            img.style.transition = 'opacity 0.5s ease';
         }
+        
+        activeSlide.classList.add('active');
+        dotsContainer.children[currentSlide].classList.add('active');
+    }
 
-        // Controles de navegação
-        document.querySelector('.slideshow-prev').addEventListener('click', () => {
-            goToSlide(currentSlide - 1);
-        });
+    // Controles de navegação
+    document.querySelector('.slideshow-prev').addEventListener('click', () => {
+        isUserInteracting = true;
+        clearInterval(autoSlideInterval);
+        goToSlide(currentSlide - 1);
+        startAutoSlide();
+    });
 
-        document.querySelector('.slideshow-next').addEventListener('click', () => {
-            goToSlide(currentSlide + 1);
-        });
+    document.querySelector('.slideshow-next').addEventListener('click', () => {
+        isUserInteracting = true;
+        clearInterval(autoSlideInterval);
+        goToSlide(currentSlide + 1);
+        startAutoSlide();
+    });
 
-        // Troca automática a cada 5 segundos
-        setInterval(() => {
-            goToSlide(currentSlide + 1);
-        }, 5000);
-    </script>
+    // Função para iniciar slides automáticos
+    function startAutoSlide() {
+        if (!isUserInteracting) {
+            autoSlideInterval = setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 5000);
+        } else {
+            // Reset após 10 segundos de inatividade
+            setTimeout(() => {
+                isUserInteracting = false;
+                startAutoSlide();
+            }, 10000);
+        }
+    }
+
+    // Inicialização
+    initDots();
+    startAutoSlide();
+
+    // Carregar primeira imagem
+    const firstImg = document.querySelector('.slide.active img');
+    if (firstImg.dataset.src) {
+        firstImg.src = firstImg.dataset.src;
+    }
+
+    // Suporte para touch events
+    let touchStartX = 0;
+    const slideshowInner = document.querySelector('.slideshow-inner');
+    
+    slideshowInner.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    slideshowInner.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            isUserInteracting = true;
+            clearInterval(autoSlideInterval);
+            if (diff > 0) {
+                goToSlide(currentSlide + 1);
+            } else {
+                goToSlide(currentSlide - 1);
+            }
+            startAutoSlide();
+        }
+    }, { passive: true });
+</script>
 </body>
 </html>
