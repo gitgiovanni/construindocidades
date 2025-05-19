@@ -357,19 +357,42 @@
     });
 
     // Função para iniciar slides automáticos
-    function startAutoSlide() {
-        if (!isUserInteracting) {
-            autoSlideInterval = setInterval(() => {
-                goToSlide(currentSlide + 1);
-            }, 5000);
-        } else {
-            // Reset após 10 segundos de inatividade
-            setTimeout(() => {
-                isUserInteracting = false;
-                startAutoSlide();
-            }, 10000);
-        }
-    }
+  const slideInterval = 8000; // 8 segundos por slide
+const resumeDelay = 15000; // 15 segundos para retomar após interação
+
+// Função para iniciar slides automáticos
+function startAutoSlide() {
+    // Limpa qualquer intervalo existente
+    clearInterval(autoSlideInterval);
+    
+    // Configura novo intervalo
+    autoSlideInterval = setInterval(() => {
+        goToSlide(currentSlide + 1);
+    }, slideInterval);
+}
+
+// Inicia o slideshow
+startAutoSlide();
+
+// Pausa ao interagir e retoma depois
+slideshowInner.addEventListener('mouseenter', () => {
+    clearInterval(autoSlideInterval);
+});
+
+slideshowInner.addEventListener('mouseleave', () => {
+    setTimeout(startAutoSlide, resumeDelay);
+});
+
+// Versão para touch devices
+let touchTimer;
+slideshowInner.addEventListener('touchstart', () => {
+    clearInterval(autoSlideInterval);
+    clearTimeout(touchTimer);
+});
+
+slideshowInner.addEventListener('touchend', () => {
+    touchTimer = setTimeout(startAutoSlide, resumeDelay);
+});
 
     // Inicialização
     initDots();
