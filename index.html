@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Construindo Cidades - Galeria</title>
-<style>
-  :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #e67e22;
-        --accent-color: #3498db;
-        --text-color: #333;
-        --bg-color: #f8f9fa;
-        --card-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    <meta name="description" content="Plataforma de visualização de projetos urbanos inteligentes">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>UrbanTech - Engenharia Urbana Inteligente</title>
+    <style>
+    :root {
+        --primary-color: #2A2F35;
+        --secondary-color: #4CAF50;
+        --accent-color: #FFC107;
+        --text-color: #3D3D3D;
+        --bg-color: #F9FBFD;
+        --card-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     * {
@@ -22,100 +25,121 @@
         font-family: 'Poppins', sans-serif;
     }
 
-  body {
-    background: 
-        linear-gradient(45deg, 
-            rgba(236, 233, 230, 0.9) 0%, 
-            rgba(255, 255, 255, 0.9) 100%),
-        url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M44.9,-58.3C57.2,-50.4,65,-35.3,69.1,-19.4C73.2,-3.5,73.6,13.3,68.1,27.2C62.6,41.1,51.3,52.2,38.4,59.3C25.6,66.4,11.3,69.5,-2.8,73.4C-16.9,77.3,-33.8,82,-46.5,75.3C-59.2,68.6,-67.7,50.5,-70.8,33.7C-73.9,16.8,-71.6,1.2,-67.3,-12.1C-63,-25.5,-56.7,-36.7,-47.2,-45.4C-37.7,-54.1,-25.1,-60.3,-10.4,-57.8C4.4,-55.4,11.4,-44.4,23.9,-39.1C36.4,-33.8,54.5,-34.3,63.8,-27.1C73.1,-19.9,73.5,-5.1,70.3,7.5C67.1,20.1,60.3,30.5,52.5,41.3C44.7,52.1,35.9,63.3,24.2,69.1C12.5,74.8,-2.1,75.1,-14.1,70.8C-26.1,66.5,-35.6,57.5,-44.2,48.1C-52.8,38.7,-60.6,28.9,-65.2,17.3C-69.8,5.7,-71.3,-7.7,-65.7,-16.4C-60.1,-25.1,-47.4,-29.2,-36.1,-36.8C-24.8,-44.4,-14.8,-55.6,-1.2,-54.4C12.4,-53.3,24.8,-39.8,44.9,-58.3Z" fill="%23f4f4f4" opacity="0.1"/></svg>'),
-        radial-gradient(circle at 90% 10%, rgba(230, 126, 34, 0.08) 0%, transparent 30%),
-        radial-gradient(circle at 10% 90%, rgba(44, 62, 80, 0.08) 0%, transparent 30%);
-    background-size: 
-        100% 100%,
-        300px 300px,
-        cover,
-        cover;
-    background-attachment: fixed;
-    color: var(--text-color);
-    line-height: 1.6;
-    position: relative;
-    min-height: 100vh;
-}
+    body {
+        background: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.7;
+        overflow-x: hidden;
+    }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 4px,
-            rgba(255,255,255,0.1) 4px,
-            rgba(255,255,255,0.1) 8px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent 0px,
-            transparent 4px,
-            rgba(255,255,255,0.1) 4px,
-            rgba(255,255,255,0.1) 8px
-        );
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.3;
-}
+    /* Header */
+    .header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #1A1E23 100%);
+        color: white;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
 
-    @keyframes gradientFlow {
-    0% { background-position: 0% 0%, 0 0, 0 0, 0 0; }
-    50% { background-position: 100% 100%, 300px 300px, 100% 100%, 100% 100%; }
-    100% { background-position: 0% 0%, 0 0, 0 0, 0 0; }
-}
-
-body {
-    animation: gradientFlow 30s ease infinite;
-}
-    .container {
+    .nav-container {
         max-width: 1200px;
         margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .nav-menu {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-link {
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+    }
+
+    .nav-link:hover {
+        background: rgba(255,255,255,0.1);
+        color: white;
+    }
+
+    /* Conteúdo Principal */
+    .main-content {
+        margin-top: 100px;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 2rem auto;
         padding: 2rem;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
+        background: white;
         border-radius: 20px;
         box-shadow: var(--card-shadow);
-        margin-top: 2rem;
+    }
+
+    /* Seção Hero */
+    .hero-section {
+        text-align: center;
+        padding: 4rem 0;
+        background: linear-gradient(45deg, var(--primary-color), #3A3F45);
+        color: white;
+        border-radius: 20px;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%234CAF50" width="5" height="5"/></svg>');
+        opacity: 0.1;
     }
 
     h1 {
-        text-align: center;
-        margin: 2rem 0;
-        font-size: 2.8rem;
-        color: var(--primary-color);
-        text-transform: uppercase;
-        letter-spacing: 2px;
+        font-size: 3.2rem;
+        margin-bottom: 1.5rem;
         position: relative;
-        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        display: inline-block;
     }
 
-    /* Galeria Modernizada */
+    /* Slideshow */
     .slideshow-container {
         position: relative;
-        border-radius: 15px;
+        border-radius: 20px;
         overflow: hidden;
-        box-shadow: var(--card-shadow);
-        margin: 2rem 0;
-        border: 2px solid rgba(255, 255, 255, 0.2);
+        margin: 3rem 0;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
 
     .slideshow-inner {
         position: relative;
         height: 70vh;
-        background: rgba(0,0,0,0.05);
+        background: var(--primary-color);
     }
 
     .slide {
@@ -123,11 +147,13 @@ body {
         width: 100%;
         height: 100%;
         opacity: 0;
-        transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        transform: scale(0.98);
     }
 
     .slide.active {
         opacity: 1;
+        transform: scale(1);
     }
 
     .slide-image {
@@ -135,13 +161,19 @@ body {
         height: 100%;
         object-fit: cover;
         object-position: center;
+        transition: transform 8s ease-out;
+        cursor: zoom-in;
+    }
+
+    .slide:hover .slide-image {
+        transform: scale(1.05);
     }
 
     .slideshow-nav {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255,255,255,0.9);
         color: var(--primary-color);
         border: none;
         width: 50px;
@@ -149,17 +181,14 @@ body {
         border-radius: 50%;
         cursor: pointer;
         font-size: 1.5rem;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: var(--transition);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .slideshow-nav:hover {
         background: white;
         transform: translateY(-50%) scale(1.1);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
 
     .slideshow-prev { left: 2rem; }
@@ -167,12 +196,11 @@ body {
 
     .slideshow-dots {
         position: absolute;
-        bottom: 1.5rem;
+        bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
         gap: 12px;
-        z-index: 2;
     }
 
     .dot {
@@ -181,7 +209,7 @@ body {
         border-radius: 50%;
         background: rgba(255,255,255,0.6);
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: var(--transition);
         border: 2px solid transparent;
     }
 
@@ -191,53 +219,161 @@ body {
         border-color: rgba(255,255,255,0.3);
     }
 
-    /* Iframe Estilizado */
-    .iframe-wrapper {
+    /* Estatísticas */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        color: var(--secondary-color);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+        background: var(--primary-color);
+        color: white;
+        padding: 4rem 0 2rem;
+        margin-top: 5rem;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        padding: 0 2rem;
+    }
+
+    .footer-section h3 {
+        color: var(--secondary-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .social-links {
         display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-links a {
+        color: white;
+        font-size: 1.5rem;
+        transition: var(--transition);
+    }
+
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 2000;
         justify-content: center;
-        margin: 3rem 0;
+        align-items: center;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        max-height: 90%;
         position: relative;
     }
 
-    .iframe-wrapper::before {
-        content: 'Visualização 3D do Projeto';
+    .modal-close {
         position: absolute;
-        top: -1.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--primary-color);
+        top: 20px;
+        right: 20px;
         color: white;
-        padding: 0.5rem 1.5rem;
-        border-radius: 30px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        font-size: 2rem;
+        cursor: pointer;
     }
 
-    iframe {
+    /* Loader */
+    .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        max-width: 800px;
-        height: 450px;
-        border: 0;
-        border-radius: 15px;
-        box-shadow: var(--card-shadow);
-        background: white;
+        height: 100%;
+        background: var(--primary-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3000;
+        transition: opacity 0.5s;
+    }
+
+    .loader {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: var(--secondary-color);
+        animation: spin 1s infinite linear;
+    }
+
+    /* Progresso de Scroll */
+    .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: var(--secondary-color);
+        z-index: 1000;
+        transition: width 0.3s ease;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
     }
 
     /* Responsividade */
     @media (max-width: 768px) {
-        .container {
-            padding: 1.5rem;
-            margin: 1rem;
-            border-radius: 15px;
+        .nav-menu {
+            display: none;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
 
         .slideshow-inner {
             height: 50vh;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .logo {
+            font-size: 1.4rem;
+        }
+
+        .hero-section {
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 1.8rem;
         }
 
         .slideshow-nav {
@@ -245,220 +381,144 @@ body {
             height: 40px;
             font-size: 1.2rem;
         }
-
-        iframe {
-            height: 300px;
-        }
-
-        .iframe-wrapper::before {
-            font-size: 0.8rem;
-            padding: 0.4rem 1.2rem;
-            top: -1.2rem;
-        }
     }
-
-    @media (max-width: 480px) {
-        h1 {
-            font-size: 1.8rem;
-        }
-
-        .slideshow-nav {
-            width: 35px;
-            height: 35px;
-            font-size: 1rem;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-        }
-    }
-
-    /* Animação de Entrada */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .container {
-        animation: fadeIn 0.8s ease-out;
-    }
-</style>
-</style>
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Construindo Cidades - Eng. Computação/Software</h1>
-        
-        <!-- Galeria com lazy loading -->
-        <div class="slideshow-container">
-            <div class="slideshow-inner">
-                <!-- Slides corrigidos e com lazy loading -->
-<div class="slide>
-    <img data-src="img1.jpg" class="slide-image" alt="Projeto 1">
-</div>
-<div class="slide">
-    <img data-src="img2.jpg" class="slide-image" alt="Projeto 2">
-</div>
-<div class="slide">
-    <img data-src="img3.jpg" class="slide-image" alt="Projeto 3">
-</div>
-<div class="slide">
-    <img data-src="img4.jpg" class="slide-image" alt="Projeto 4">
-</div>
-<div class="slide">
-    <img data-src="img5.jpg" class="slide-image" alt="Projeto 5">
-</div>
-<div class="slide">
-    <img data-src="img6.jpg" class="slide-image" alt="Projeto 6">
-</div>
-<div class="slide">
-    <img data-src="img7.jpg" class="slide-image" alt="Projeto 7">
-</div>
-<div class="slide">
-    <img data-src="img8.jpg" class="slide-image" alt="Projeto 8">
-</div>
-<div class="slide">
-    <img data-src="img9.jpg" class="slide-image" alt="Projeto 9">
-</div>
-<div class="slide">
-    <img data-src="img10.jpg" class="slide-image" alt="Projeto 10">
-</div>
-<div class="slide">
-    <img data-src="img11.jpg" class="slide-image" alt="Projeto 11">
-</div>
-<div class="slide">
-    <img data-src="img12.jpg" class="slide-image" alt="Projeto 12">
-</div>
-<div class="slide">
-    <img data-src="img13.jpg" class="slide-image" alt="Projeto 13">
-</div>
-<div class="slide">
-    <img data-src="img14.jpg" class="slide-image" alt="Projeto 14">
-</div>
-<div class="slide">
-    <img data-src="img15.jpg" class="slide-image" alt="Projeto 15">
-</div>
-<div class="slide">
-    <img data-src="img16.jpg" class="slide-image" alt="Projeto 16">
-</div>
-<div class="slide">
-    <img data-src="img17.jpg" class="slide-image" alt="Projeto 17">
-</div>
-<div class="slide">
-    <img data-src="img18.jpg" class="slide-image" alt="Projeto 18">
-</div>
-<div class="slide">
-    <img data-src="img19.jpg" class="slide-image" alt="Projeto 19">
-</div>
-<div class="slide">
-    <img data-src="img20.jpg" class="slide-image" alt="Projeto 20">
-</div>
-<div class="slide">
-    <img data-src="img21.jpg" class="slide-image" alt="Projeto 21">
-</div>
-<div class="slide">
-    <img data-src="img22.jpg" class="slide-image" alt="Projeto 22">
-</div>
-<div class="slide">
-    <img data-src="img23.jpg" class="slide-image" alt="Projeto 23">
-</div>
-<div class="slide">
-    <img data-src="img24.jpg" class="slide-image" alt="Projeto 24">
-</div>
-<div class="slide">
-    <img data-src="img25.jpg" class="slide-image" alt="Projeto 25">
-</div>
-<div class="slide">
-    <img data-src="img26.jpg" class="slide-image" alt="Projeto 26">
-</div>
-<div class="slide">
-    <img data-src="img27.jpg" class="slide-image" alt="Projeto 27">
-</div>
-<div class="slide">
-    <img data-src="img28.jpg" class="slide-image" alt="Projeto 28">
-</div>
-<div class="slide">
-    <img data-src="img29.jpg" class="slide-image" alt="Projeto 29">
-</div>
-<div class="slide">
-    <img data-src="img30.jpg" class="slide-image" alt="Projeto 30">
-</div>
-<div class="slide">
-    <img data-src="img31.jpg" class="slide-image" alt="Projeto 31">
-</div>
-<div class="slide">
-    <img data-src="img32.jpg" class="slide-image" alt="Projeto 32">
-</div>
-<div class="slide">
-    <img data-src="img33.jpg" class="slide-image" alt="Projeto 33">
-</div>
-<div class="slide">
-    <img data-src="img34.jpg" class="slide-image" alt="Projeto 34">
-</div>
-<div class="slide">
-    <img data-src="img35.jpg" class="slide-image" alt="Projeto 35">
-</div>
-<div class="slide">
-    <img data-src="img36.jpg" class="slide-image" alt="Projeto 36">
-</div>
-<div class="slide">
-    <img data-src="img37.jpg" class="slide-image" alt="Projeto 37">
-</div>
-<div class="slide">
-    <img data-src="img38.jpg" class="slide-image" alt="Projeto 38">
-</div>
-<div class="slide">
-    <img data-src="img39.jpg" class="slide-image" alt="Projeto 39">
-</div>
-<div class="slide">
-    <img data-src="img40.jpg" class="slide-image" alt="Projeto 40">
-</div>
-<div class="slide">
-    <img data-src="img41.jpg" class="slide-image" alt="Projeto 41">
-</div>
-<div class="slide">
-    <img data-src="img42.jpg" class="slide-image" alt="Projeto 42">
-</div>
-               
-                
-                <button class="slideshow-nav slideshow-prev">❮</button>
-                <button class="slideshow-nav slideshow-next">❯</button>
-                
-                <div class="slideshow-dots"></div>
-            </div>
-        </div>
-
-        <!-- Iframe centralizado e responsivo -->
-        <div class="iframe-wrapper">
-            <iframe src="https://www.google.com/maps/embed?pb=!4v1747694251342!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREdwTEtJQmc.!2m2!1d-23.549961316668!2d-46.64915989497705!3f100.06136175360433!4f0!5f0.7820865974627469" 
-                    width="600" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
+    <!-- Tela de Carregamento -->
+    <div class="loading-screen">
+        <div class="loader"></div>
     </div>
 
-<script>
-    // Configuração da Galeria
+    <!-- Barra de Progresso -->
+    <div class="scroll-progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-city"></i>
+                UrbanTech
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#projetos" class="nav-link">Projetos</a></li>
+                <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li><a href="#contato" class="nav-link">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Seção Hero -->
+            <section class="hero-section">
+                <h1>Engenharia Urbana Inteligente</h1>
+                <p>Soluções inovadoras para cidades do futuro</p>
+            </section>
+
+            <!-- Galeria de Projetos -->
+            <div class="slideshow-container" id="projetos">
+                <div class="slideshow-inner"></div>
+                <button class="slideshow-nav slideshow-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slideshow-nav slideshow-next"><i class="fas fa-chevron-right"></i></button>
+                <div class="slideshow-dots"></div>
+            </div>
+
+            <!-- Estatísticas -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Projetos Concluídos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">40+</div>
+                    <div class="stat-label">Prêmios Internacionais</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfação do Cliente</div>
+                </div>
+            </div>
+
+            <!-- Mapa -->
+            <div class="iframe-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!4v1747694251342!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREdwTEtJQmc.!2m2!1d-23.549961316668!2d-46.64915989497705!3f100.06136175360433!4f0!5f0.7820865974627469" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>contato@urbantech.com</p>
+                <p>+55 11 99999-9999</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content">
+    </div>
+
+    <script>
+    // Inicialização do Site
+    window.addEventListener('load', () => {
+        document.querySelector('.loading-screen').style.opacity = '0';
+        setTimeout(() => {
+            document.querySelector('.loading-screen').style.display = 'none';
+        }, 500);
+    });
+
+    // Progresso de Scroll
+    window.addEventListener('scroll', () => {
+        const scrollProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        document.querySelector('.scroll-progress').style.width = `${scrollProgress}%`;
+    });
+
+    // Sistema de Slideshow
+    const slideshowInner = document.querySelector('.slideshow-inner');
+    const slidesData = Array.from({length: 42}, (_, i) => `img${i+1}.jpg`);
+    
+    // Gerar slides dinamicamente
+    slidesData.forEach((imgSrc, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.innerHTML = `
+            <img data-src="${imgSrc}" class="slide-image" alt="Projeto ${index+1}"
+                 loading="lazy" onclick="openModal('${imgSrc}')">
+        `;
+        slideshowInner.appendChild(slide);
+    });
+
+    let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
     const dotsContainer = document.querySelector('.slideshow-dots');
-    let currentSlide = 0;
     let autoSlideInterval;
-    let isUserInteracting = false;
 
     // Inicializar dots
     function initDots() {
         dotsContainer.innerHTML = '';
         slides.forEach((_, index) => {
             const dot = document.createElement('div');
-            dot.classList.add('dot');
+            dot.className = 'dot';
             if (index === 0) dot.classList.add('active');
             dot.addEventListener('click', () => {
-                isUserInteracting = true;
                 clearInterval(autoSlideInterval);
                 goToSlide(index);
                 startAutoSlide();
@@ -467,80 +527,75 @@ body {
         });
     }
 
-    // Função de navegação com lazy loading
+    // Navegação entre slides
     function goToSlide(n) {
         slides[currentSlide].classList.remove('active');
         dotsContainer.children[currentSlide].classList.remove('active');
         
         currentSlide = (n + slides.length) % slides.length;
-        const activeSlide = slides[currentSlide];
-        const img = activeSlide.querySelector('img');
-        
-        // Carregar imagem apenas quando necessário
-        if (img.dataset.src && !img.src) {
-            img.src = img.dataset.src;
-            img.onload = () => {
-                img.style.opacity = 1;
-            };
-            img.style.opacity = 0;
-            img.style.transition = 'opacity 0.5s ease';
-        }
-        
-        activeSlide.classList.add('active');
+        slides[currentSlide].classList.add('active');
         dotsContainer.children[currentSlide].classList.add('active');
     }
 
     // Controles de navegação
     document.querySelector('.slideshow-prev').addEventListener('click', () => {
-        isUserInteracting = true;
         clearInterval(autoSlideInterval);
         goToSlide(currentSlide - 1);
         startAutoSlide();
     });
 
     document.querySelector('.slideshow-next').addEventListener('click', () => {
-        isUserInteracting = true;
         clearInterval(autoSlideInterval);
         goToSlide(currentSlide + 1);
         startAutoSlide();
     });
 
- // Troca automática a cada 5 segundos (5000ms)
-setInterval(() => {
-    goToSlide(currentSlide + 1);
-}, 10000);
+    // Autoplay
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            goToSlide(currentSlide + 1);
+        }, 5000);
+    }
+
+    // Modal
+    function openModal(src) {
+        const modal = document.querySelector('.modal');
+        const modalImg = modal.querySelector('img');
+        modal.style.display = 'flex';
+        modalImg.src = src;
+    }
+
+    document.querySelector('.modal-close').addEventListener('click', () => {
+        document.querySelector('.modal').style.display = 'none';
+    });
+
+    // Navegação por teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+        if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+        if (e.key === 'Escape') document.querySelector('.modal').style.display = 'none';
+    });
+
+    // Lazy Loading com Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target.querySelector('img');
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('.slide').forEach(slide => {
+        observer.observe(slide);
+    });
+
     // Inicialização
     initDots();
     startAutoSlide();
-
-    // Carregar primeira imagem
-    const firstImg = document.querySelector('.slide.active img');
-    if (firstImg.dataset.src) {
-        firstImg.src = firstImg.dataset.src;
-    }
-
-    // Suporte para touch events
-    let touchStartX = 0;
-    const slideshowInner = document.querySelector('.slideshow-inner');
-    
-    slideshowInner.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-
-    slideshowInner.addEventListener('touchend', (e) => {
-        const touchEndX = e.changedTouches[0].clientX;
-        const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 50) {
-            isUserInteracting = true;
-            clearInterval(autoSlideInterval);
-            if (diff > 0) {
-                goToSlide(currentSlide + 1);
-            } else {
-                goToSlide(currentSlide - 1);
-            }
-            startAutoSlide();
-        }
-    }, { passive: true });
-</script>
+    </script>
 </body>
 </html>
