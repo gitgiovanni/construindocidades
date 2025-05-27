@@ -502,164 +502,155 @@
         <img class="modal-content">
     </div>
 
-    <script>
-
-         <script>
-    // Scroll suave e navegação ativa
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            document.querySelector(targetId).scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            
-            // Atualizar classe ativa
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
+<script>
+// Scroll suave e navegação ativa
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        document.querySelector(targetId).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
         });
-    });
-
-    // Observer para mudar link ativo
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }, { threshold: 0.5 });
-
-    // Observar seções
-    document.querySelectorAll('section, #projetos, #contato').forEach(section => {
-        observer.observe(section);
-    });
-
-    // Inicialização do Site
-    window.addEventListener('load', () => {
-        document.querySelector('.loading-screen').style.opacity = '0';
-        setTimeout(() => {
-            document.querySelector('.loading-screen').style.display = 'none';
-        }, 500);
-    });
-
-    // Progresso de Scroll
-    window.addEventListener('scroll', () => {
-        const scrollProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        document.querySelector('.scroll-progress').style.width = `${scrollProgress}%`;
-    });
-
-    // Sistema de Slideshow
-    const slideshowInner = document.querySelector('.slideshow-inner');
-    const slidesData = Array.from({length: 42}, (_, i) => `img${i+1}.jpg`);
-    
-    // Gerar slides dinamicamente
-    slidesData.forEach((imgSrc, index) => {
-        const slide = document.createElement('div');
-        slide.className = 'slide';
-        slide.innerHTML = `
-            <img data-src="${imgSrc}" class="slide-image" alt="Projeto ${index+1}"
-                 loading="lazy" onclick="openModal('${imgSrc}')">
-        `;
-        slideshowInner.appendChild(slide);
-    });
-
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dotsContainer = document.querySelector('.slideshow-dots');
-    let autoSlideInterval;
-
-    // Inicializar dots
-    function initDots() {
-        dotsContainer.innerHTML = '';
-        slides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => {
-                clearInterval(autoSlideInterval);
-                goToSlide(index);
-                startAutoSlide();
-            });
-            dotsContainer.appendChild(dot);
-        });
-    }
-
-    // Navegação entre slides
-    function goToSlide(n) {
-        slides[currentSlide].classList.remove('active');
-        dotsContainer.children[currentSlide].classList.remove('active');
         
-        currentSlide = (n + slides.length) % slides.length;
-        slides[currentSlide].classList.add('active');
-        dotsContainer.children[currentSlide].classList.add('active');
-    }
-
-    // Controles de navegação
-    document.querySelector('.slideshow-prev').addEventListener('click', () => {
-        clearInterval(autoSlideInterval);
-        goToSlide(currentSlide - 1);
-        startAutoSlide();
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
     });
+});
 
-    document.querySelector('.slideshow-next').addEventListener('click', () => {
-        clearInterval(autoSlideInterval);
-        goToSlide(currentSlide + 1);
-        startAutoSlide();
-    });
-
-    // Autoplay
-    function startAutoSlide() {
-        autoSlideInterval = setInterval(() => {
-            goToSlide(currentSlide + 1);
-        }, 5000);
-    }
-
-    // Modal
-    function openModal(src) {
-        const modal = document.querySelector('.modal');
-        const modalImg = modal.querySelector('img');
-        modal.style.display = 'flex';
-        modalImg.src = src;
-    }
-
-    document.querySelector('.modal-close').addEventListener('click', () => {
-        document.querySelector('.modal').style.display = 'none';
-    });
-
-    // Navegação por teclado
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-        if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
-        if (e.key === 'Escape') document.querySelector('.modal').style.display = 'none';
-    });
-
-    // Lazy Loading com Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target.querySelector('img');
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
+// Observer para navegação
+const navObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                    link.classList.add('active');
                 }
-            }
+            });
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('section, #projetos, #contato').forEach(section => {
+    navObserver.observe(section);
+});
+
+// Inicialização do Site
+window.addEventListener('load', () => {
+    document.querySelector('.loading-screen').style.opacity = '0';
+    setTimeout(() => {
+        document.querySelector('.loading-screen').style.display = 'none';
+    }, 500);
+});
+
+// Progresso de Scroll
+window.addEventListener('scroll', () => {
+    const scrollProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.querySelector('.scroll-progress').style.width = `${scrollProgress}%`;
+});
+
+// Sistema de Slideshow
+const slideshowInner = document.querySelector('.slideshow-inner');
+const slidesData = Array.from({length: 42}, (_, i) => `img${i+1}.jpg`);
+    
+slidesData.forEach((imgSrc, index) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.innerHTML = `
+        <img data-src="${imgSrc}" class="slide-image" alt="Projeto ${index+1}"
+             loading="lazy" onclick="openModal('${imgSrc}')">
+    `;
+    slideshowInner.appendChild(slide);
+});
+
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.querySelector('.slideshow-dots');
+let autoSlideInterval;
+
+function initDots() {
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            clearInterval(autoSlideInterval);
+            goToSlide(index);
+            startAutoSlide();
         });
+        dotsContainer.appendChild(dot);
     });
+}
 
-    document.querySelectorAll('.slide').forEach(slide => {
-        observer.observe(slide);
-    });
+function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dotsContainer.children[currentSlide].classList.remove('active');
+    
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dotsContainer.children[currentSlide].classList.add('active');
+}
 
-    // Inicialização
-    initDots();
+document.querySelector('.slideshow-prev').addEventListener('click', () => {
+    clearInterval(autoSlideInterval);
+    goToSlide(currentSlide - 1);
     startAutoSlide();
-    </script>
+});
+
+document.querySelector('.slideshow-next').addEventListener('click', () => {
+    clearInterval(autoSlideInterval);
+    goToSlide(currentSlide + 1);
+    startAutoSlide();
+});
+
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        goToSlide(currentSlide + 1);
+    }, 5000);
+}
+
+// Modal
+function openModal(src) {
+    const modal = document.querySelector('.modal');
+    const modalImg = modal.querySelector('img');
+    modal.style.display = 'flex';
+    modalImg.src = src;
+}
+
+document.querySelector('.modal-close').addEventListener('click', () => {
+    document.querySelector('.modal').style.display = 'none';
+});
+
+// Navegação por teclado
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+    if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    if (e.key === 'Escape') document.querySelector('.modal').style.display = 'none';
+});
+
+// Lazy Loading com Intersection Observer
+const imgObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target.querySelector('img');
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        }
+    });
+});
+
+document.querySelectorAll('.slide').forEach(slide => {
+    imgObserver.observe(slide);
+});
+
+// Inicialização
+initDots();
+startAutoSlide();
+</script>
 </body>
 </html>
