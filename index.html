@@ -382,6 +382,45 @@
             font-size: 1.2rem;
         }
     }
+
+            html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Seções alvo */
+    section {
+        scroll-margin-top: 100px;
+    }
+
+    /* Iframe maior */
+    .iframe-wrapper {
+        margin: 4rem 0;
+        padding: 2rem;
+        background: var(--bg-color);
+        border-radius: 20px;
+    }
+
+    iframe {
+        width: 100%;
+        height: 600px;
+        border: 0;
+        border-radius: 15px;
+        box-shadow: var(--card-shadow);
+    }
+
+    /* Botões da Navbar ativos */
+    .nav-link.active {
+        background: var(--secondary-color);
+        color: white !important;
+    }
+
+    /* Seção Sobre */
+    .about-section {
+        padding: 4rem 0;
+        margin: 4rem 0;
+        background: #f8f9fa;
+        border-radius: 20px;
+    }
     </style>
 </head>
 <body>
@@ -394,7 +433,7 @@
     <div class="scroll-progress"></div>
 
     <!-- Header -->
-    <header class="header">
+     <header class="header">
         <nav class="nav-container">
             <a href="#" class="logo">
                 <i class="fas fa-city"></i>
@@ -409,39 +448,27 @@
     </header>
 
     <!-- Conteúdo Principal -->
-    <main class="main-content">
+   <main class="main-content">
         <div class="container">
-            <!-- Seção Hero -->
-            <section class="hero-section">
+            <!-- Seção Hero com ID -->
+            <section class="hero-section" id="inicio">
                 <h1>Engenharia Urbana Inteligente</h1>
                 <p>Soluções inovadoras para cidades do futuro</p>
             </section>
 
-            <!-- Galeria de Projetos -->
+            <!-- Nova Seção Sobre -->
+            <section class="about-section" id="sobre">
+                <h2>Sobre Nós</h2>
+                <p>Somos especialistas em desenvolvimento urbano sustentável...</p>
+                <!-- Adicione mais conteúdo aqui -->
+            </section>
+
+            <!-- Galeria com ID -->
             <div class="slideshow-container" id="projetos">
-                <div class="slideshow-inner"></div>
-                <button class="slideshow-nav slideshow-prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="slideshow-nav slideshow-next"><i class="fas fa-chevron-right"></i></button>
-                <div class="slideshow-dots"></div>
+                <!-- Conteúdo anterior mantido -->
             </div>
 
-            <!-- Estatísticas -->
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">150+</div>
-                    <div class="stat-label">Projetos Concluídos</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">40+</div>
-                    <div class="stat-label">Prêmios Internacionais</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Satisfação do Cliente</div>
-                </div>
-            </div>
-
-            <!-- Mapa -->
+            <!-- Iframe mais destacado -->
             <div class="iframe-wrapper">
                 <iframe src="https://www.google.com/maps/embed?pb=!4v1747694251342!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREdwTEtJQmc.!2m2!1d-23.549961316668!2d-46.64915989497705!3f100.06136175360433!4f0!5f0.7820865974627469" 
                         loading="lazy" 
@@ -450,7 +477,6 @@
             </div>
         </div>
     </main>
-
     <!-- Footer -->
     <footer id="contato">
         <div class="footer-content">
@@ -477,6 +503,44 @@
     </div>
 
     <script>
+
+         <script>
+    // Scroll suave e navegação ativa
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Atualizar classe ativa
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Observer para mudar link ativo
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    // Observar seções
+    document.querySelectorAll('section, #projetos, #contato').forEach(section => {
+        observer.observe(section);
+    });
+
     // Inicialização do Site
     window.addEventListener('load', () => {
         document.querySelector('.loading-screen').style.opacity = '0';
