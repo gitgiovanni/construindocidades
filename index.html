@@ -169,6 +169,19 @@
         transform: scale(1.05);
     }
 
+    /* Placeholder para imagens que não carregam */
+    .slide-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
     .slideshow-nav {
         position: absolute;
         top: 50%;
@@ -201,6 +214,9 @@
         transform: translateX(-50%);
         display: flex;
         gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 90%;
     }
 
     .dot {
@@ -361,6 +377,15 @@
         .stats-grid {
             grid-template-columns: 1fr;
         }
+
+        .slideshow-dots {
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+        }
     }
 
     @media (max-width: 480px) {
@@ -383,7 +408,7 @@
         }
     }
 
-            html {
+    html {
         scroll-behavior: smooth;
     }
     
@@ -433,7 +458,7 @@
     <div class="scroll-progress"></div>
 
     <!-- Header -->
-     <header class="header">
+    <header class="header">
         <nav class="nav-container">
             <a href="#" class="logo">
                 <i class="fas fa-city"></i>
@@ -448,7 +473,7 @@
     </header>
 
     <!-- Conteúdo Principal -->
-   <main class="main-content">
+    <main class="main-content">
         <div class="container">
             <!-- Seção Hero com ID -->
             <section class="hero-section" id="inicio">
@@ -465,7 +490,18 @@
 
             <!-- Galeria com ID -->
             <div class="slideshow-container" id="projetos">
-                <!-- Conteúdo anterior mantido -->
+                <div class="slideshow-inner">
+                    <!-- Os slides serão criados dinamicamente pelo JavaScript -->
+                </div>
+                
+                <button class="slideshow-nav slideshow-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slideshow-nav slideshow-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="slideshow-dots"></div>
             </div>
 
             <!-- Iframe mais destacado -->
@@ -477,6 +513,7 @@
             </div>
         </div>
     </main>
+
     <!-- Footer -->
     <footer id="contato">
         <div class="footer-content">
@@ -502,155 +539,197 @@
         <img class="modal-content">
     </div>
 
-<script>
-// Scroll suave e navegação ativa
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        document.querySelector(targetId).scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-        
-        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-    });
-});
-
-// Observer para navegação
-const navObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('id');
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${id}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-    });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('section, #projetos, #contato').forEach(section => {
-    navObserver.observe(section);
-});
-
-// Inicialização do Site
-window.addEventListener('load', () => {
-    document.querySelector('.loading-screen').style.opacity = '0';
-    setTimeout(() => {
-        document.querySelector('.loading-screen').style.display = 'none';
-    }, 500);
-});
-
-// Progresso de Scroll
-window.addEventListener('scroll', () => {
-    const scrollProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    document.querySelector('.scroll-progress').style.width = `${scrollProgress}%`;
-});
-
-// Sistema de Slideshow
-const slideshowInner = document.querySelector('.slideshow-inner');
-const slidesData = Array.from({length: 42}, (_, i) => `img${i+1}.jpg`);
-    
-slidesData.forEach((imgSrc, index) => {
-    const slide = document.createElement('div');
-    slide.className = 'slide';
-    slide.innerHTML = `
-        <img data-src="${imgSrc}" class="slide-image" alt="Projeto ${index+1}"
-             loading="lazy" onclick="openModal('${imgSrc}')">
-    `;
-    slideshowInner.appendChild(slide);
-});
-
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const dotsContainer = document.querySelector('.slideshow-dots');
-let autoSlideInterval;
-
-function initDots() {
-    dotsContainer.innerHTML = '';
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.className = 'dot';
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-            clearInterval(autoSlideInterval);
-            goToSlide(index);
-            startAutoSlide();
-        });
-        dotsContainer.appendChild(dot);
-    });
-}
-
-function goToSlide(n) {
-    slides[currentSlide].classList.remove('active');
-    dotsContainer.children[currentSlide].classList.remove('active');
-    
-    currentSlide = (n + slides.length) % slides.length;
-    slides[currentSlide].classList.add('active');
-    dotsContainer.children[currentSlide].classList.add('active');
-}
-
-document.querySelector('.slideshow-prev').addEventListener('click', () => {
-    clearInterval(autoSlideInterval);
-    goToSlide(currentSlide - 1);
-    startAutoSlide();
-});
-
-document.querySelector('.slideshow-next').addEventListener('click', () => {
-    clearInterval(autoSlideInterval);
-    goToSlide(currentSlide + 1);
-    startAutoSlide();
-});
-
-function startAutoSlide() {
-    autoSlideInterval = setInterval(() => {
-        goToSlide(currentSlide + 1);
-    }, 5000);
-}
-
-// Modal
-function openModal(src) {
-    const modal = document.querySelector('.modal');
-    const modalImg = modal.querySelector('img');
-    modal.style.display = 'flex';
-    modalImg.src = src;
-}
-
-document.querySelector('.modal-close').addEventListener('click', () => {
-    document.querySelector('.modal').style.display = 'none';
-});
-
-// Navegação por teclado
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-    if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
-    if (e.key === 'Escape') document.querySelector('.modal').style.display = 'none';
-});
-
-// Lazy Loading com Intersection Observer
-const imgObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const img = entry.target.querySelector('img');
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
+    <script>
+    // Scroll suave e navegação ativa
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
+            
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Observer para navegação
+    const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('section, #projetos, #contato').forEach(section => {
+        navObserver.observe(section);
+    });
+
+    // Inicialização do Site
+    window.addEventListener('load', () => {
+        document.querySelector('.loading-screen').style.opacity = '0';
+        setTimeout(() => {
+            document.querySelector('.loading-screen').style.display = 'none';
+        }, 500);
+    });
+
+    // Progresso de Scroll
+    window.addEventListener('scroll', () => {
+        const scrollProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        document.querySelector('.scroll-progress').style.width = `${scrollProgress}%`;
+    });
+
+    // Sistema de Slideshow
+    const slideshowInner = document.querySelector('.slideshow-inner');
+    
+    // Lista das suas imagens (img1.jpg até img42.jpg)
+    const imageList = [
+        'img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg', 'img7.jpg', 'img8.jpg', 'img9.jpg', 'img10.jpg',
+        'img11.jpg', 'img12.jpg', 'img13.jpg', 'img14.jpg', 'img15.jpg', 'img16.jpg', 'img17.jpg', 'img18.jpg', 'img19.jpg', 'img20.jpg',
+        'img21.jpg', 'img22.jpg', 'img23.jpg', 'img24.jpg', 'img25.jpg', 'img26.jpg', 'img27.jpg', 'img28.jpg', 'img29.jpg', 'img30.jpg',
+        'img31.jpg', 'img32.jpg', 'img33.jpg', 'img34.jpg', 'img35.jpg', 'img36.jpg', 'img37.jpg', 'img38.jpg', 'img39.jpg', 'img40.jpg',
+        'img41.jpg', 'img42.jpg'
+    ];
+        
+    // Criar slides dinamicamente
+    imageList.forEach((imgSrc, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        
+        const img = document.createElement('img');
+        img.className = 'slide-image';
+        img.alt = `Projeto ${index + 1}`;
+        img.loading = 'lazy';
+        img.onclick = () => openModal(imgSrc);
+        
+        // Criar placeholder para caso a imagem não carregue
+        const placeholder = document.createElement('div');
+        placeholder.className = 'slide-placeholder';
+        placeholder.innerHTML = `<div><i class="fas fa-image" style="font-size: 3rem; margin-bottom: 1rem;"></i><br>Projeto ${index + 1}</div>`;
+        
+        slide.appendChild(placeholder);
+        slide.appendChild(img);
+        
+        // Tentar carregar a imagem
+        img.onload = () => {
+            placeholder.style.display = 'none';
+            img.style.display = 'block';
+        };
+        
+        img.onerror = () => {
+            placeholder.style.display = 'flex';
+            img.style.display = 'none';
+        };
+        
+        img.src = imgSrc;
+        img.style.display = 'none'; // Inicialmente oculta até carregar
+        
+        slideshowInner.appendChild(slide);
+    });
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.querySelector('.slideshow-dots');
+    let autoSlideInterval;
+
+    function initDots() {
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                clearInterval(autoSlideInterval);
+                goToSlide(index);
+                startAutoSlide();
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function goToSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        dotsContainer.children[currentSlide].classList.remove('active');
+        
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        dotsContainer.children[currentSlide].classList.add('active');
+    }
+
+    document.querySelector('.slideshow-prev').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        goToSlide(currentSlide - 1);
+        startAutoSlide();
+    });
+
+    document.querySelector('.slideshow-next').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        goToSlide(currentSlide + 1);
+        startAutoSlide();
+    });
+
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            goToSlide(currentSlide + 1);
+        }, 5000);
+    }
+
+    // Modal
+    function openModal(src) {
+        const modal = document.querySelector('.modal');
+        const modalImg = modal.querySelector('img');
+        modal.style.display = 'flex';
+        modalImg.src = src;
+    }
+
+    document.querySelector('.modal-close').addEventListener('click', () => {
+        document.querySelector('.modal').style.display = 'none';
+    });
+
+    // Navegação por teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            clearInterval(autoSlideInterval);
+            goToSlide(currentSlide - 1);
+            startAutoSlide();
+        }
+        if (e.key === 'ArrowRight') {
+            clearInterval(autoSlideInterval);
+            goToSlide(currentSlide + 1);
+            startAutoSlide();
+        }
+        if (e.key === 'Escape') document.querySelector('.modal').style.display = 'none';
+    });
+
+    // Inicialização do slideshow
+    setTimeout(() => {
+        if (slides.length > 0) {
+            slides[0].classList.add('active');
+            initDots();
+            startAutoSlide();
+        }
+    }, 100);
+
+    // Pausar slideshow quando não estiver visível
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            clearInterval(autoSlideInterval);
+        } else {
+            startAutoSlide();
         }
     });
-});
-
-document.querySelectorAll('.slide').forEach(slide => {
-    imgObserver.observe(slide);
-});
-
-// Inicialização
-initDots();
-startAutoSlide();
-</script>
+    </script>
 </body>
 </html>
