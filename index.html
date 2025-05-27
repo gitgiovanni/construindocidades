@@ -22,12 +22,62 @@
         font-family: 'Poppins', sans-serif;
     }
 
-    body {
-        background: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
-        color: var(--text-color);
-        line-height: 1.6;
-    }
+  body {
+    background: 
+        linear-gradient(45deg, 
+            rgba(236, 233, 230, 0.9) 0%, 
+            rgba(255, 255, 255, 0.9) 100%),
+        url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M44.9,-58.3C57.2,-50.4,65,-35.3,69.1,-19.4C73.2,-3.5,73.6,13.3,68.1,27.2C62.6,41.1,51.3,52.2,38.4,59.3C25.6,66.4,11.3,69.5,-2.8,73.4C-16.9,77.3,-33.8,82,-46.5,75.3C-59.2,68.6,-67.7,50.5,-70.8,33.7C-73.9,16.8,-71.6,1.2,-67.3,-12.1C-63,-25.5,-56.7,-36.7,-47.2,-45.4C-37.7,-54.1,-25.1,-60.3,-10.4,-57.8C4.4,-55.4,11.4,-44.4,23.9,-39.1C36.4,-33.8,54.5,-34.3,63.8,-27.1C73.1,-19.9,73.5,-5.1,70.3,7.5C67.1,20.1,60.3,30.5,52.5,41.3C44.7,52.1,35.9,63.3,24.2,69.1C12.5,74.8,-2.1,75.1,-14.1,70.8C-26.1,66.5,-35.6,57.5,-44.2,48.1C-52.8,38.7,-60.6,28.9,-65.2,17.3C-69.8,5.7,-71.3,-7.7,-65.7,-16.4C-60.1,-25.1,-47.4,-29.2,-36.1,-36.8C-24.8,-44.4,-14.8,-55.6,-1.2,-54.4C12.4,-53.3,24.8,-39.8,44.9,-58.3Z" fill="%23f4f4f4" opacity="0.1"/></svg>'),
+        radial-gradient(circle at 90% 10%, rgba(230, 126, 34, 0.08) 0%, transparent 30%),
+        radial-gradient(circle at 10% 90%, rgba(44, 62, 80, 0.08) 0%, transparent 30%);
+    background-size: 
+        100% 100%,
+        300px 300px,
+        cover,
+        cover;
+    background-attachment: fixed;
+    color: var(--text-color);
+    line-height: 1.6;
+    position: relative;
+    min-height: 100vh;
+}
 
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 4px,
+            rgba(255,255,255,0.1) 4px,
+            rgba(255,255,255,0.1) 8px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 4px,
+            rgba(255,255,255,0.1) 4px,
+            rgba(255,255,255,0.1) 8px
+        );
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+    @keyframes gradientFlow {
+    0% { background-position: 0% 0%, 0 0, 0 0, 0 0; }
+    50% { background-position: 100% 100%, 300px 300px, 100% 100%, 100% 100%; }
+    100% { background-position: 0% 0%, 0 0, 0 0, 0 0; }
+}
+
+body {
+    animation: gradientFlow 30s ease infinite;
+}
     .container {
         max-width: 1200px;
         margin: 0 auto;
