@@ -1,19 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plataforma de visualização de projetos urbanos inteligentes">
+    <meta name="description" content="Projeto de extensão - Construindo Cidades: Tecnologia para o Parque Augusta">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <title>UrbanTech - Engenharia Urbana Inteligente</title>
+    <title>Parque Augusta Tech - Construindo Cidades</title>
     <style>
     :root {
-        --primary-color: #2A2F35;
+        --primary-color: #2A5B2A;
         --secondary-color: #4CAF50;
-        --accent-color: #FFC107;
-        --text-color: #3D3D3D;
-        --bg-color: #F9FBFD;
+        --accent-color: #8BC34A;
+        --text-color: #2E2E2E;
+        --bg-color: #F7FBF7;
         --card-shadow: 0 12px 24px rgba(0,0,0,0.08);
         --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
@@ -34,7 +35,7 @@
 
     /* Header */
     .header {
-        background: linear-gradient(135deg, var(--primary-color) 0%, #1A1E23 100%);
+        background: linear-gradient(135deg, var(--primary-color) 0%, #1A3F1A 100%);
         color: white;
         padding: 1rem 0;
         position: fixed;
@@ -56,7 +57,7 @@
     .logo {
         font-size: 1.8rem;
         font-weight: 700;
-        color: var(--secondary-color);
+        color: var(--accent-color);
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -101,7 +102,7 @@
     .hero-section {
         text-align: center;
         padding: 4rem 0;
-        background: linear-gradient(45deg, var(--primary-color), #3A3F45);
+        background: linear-gradient(45deg, var(--primary-color), #3A6B3A);
         color: white;
         border-radius: 20px;
         margin-bottom: 3rem;
@@ -125,6 +126,13 @@
         margin-bottom: 1.5rem;
         position: relative;
         display: inline-block;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: var(--accent-color);
+        font-weight: 600;
     }
 
     /* Slideshow */
@@ -173,7 +181,7 @@
     .slide-placeholder {
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -230,9 +238,42 @@
     }
 
     .dot.active {
-        background: var(--secondary-color);
+        background: var(--accent-color);
         transform: scale(1.3);
         border-color: rgba(255,255,255,0.3);
+    }
+
+    /* Seção Sobre */
+    .about-section {
+        padding: 4rem 2rem;
+        margin: 4rem 0;
+        background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+        border-radius: 20px;
+        border: 2px solid rgba(76, 175, 80, 0.1);
+    }
+
+    .about-section h2 {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+
+    .about-content p {
+        margin-bottom: 1.5rem;
+    }
+
+    .highlight {
+        color: var(--primary-color);
+        font-weight: 600;
     }
 
     /* Estatísticas */
@@ -240,7 +281,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 2rem;
-        margin: 2rem 0;
+        margin: 3rem 0;
     }
 
     .stat-item {
@@ -249,6 +290,7 @@
         background: white;
         border-radius: 15px;
         box-shadow: var(--card-shadow);
+        border-top: 4px solid var(--secondary-color);
     }
 
     .stat-number {
@@ -256,6 +298,11 @@
         color: var(--secondary-color);
         font-weight: 700;
         margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        color: var(--text-color);
+        font-weight: 500;
     }
 
     /* Footer */
@@ -276,7 +323,7 @@
     }
 
     .footer-section h3 {
-        color: var(--secondary-color);
+        color: var(--accent-color);
         margin-bottom: 1.5rem;
     }
 
@@ -290,6 +337,11 @@
         color: white;
         font-size: 1.5rem;
         transition: var(--transition);
+    }
+
+    .social-links a:hover {
+        color: var(--accent-color);
+        transform: scale(1.2);
     }
 
     /* Modal */
@@ -341,7 +393,7 @@
         height: 50px;
         border: 3px solid rgba(255,255,255,0.3);
         border-radius: 50%;
-        border-top-color: var(--secondary-color);
+        border-top-color: var(--accent-color);
         animation: spin 1s infinite linear;
     }
 
@@ -425,6 +477,14 @@
         border-radius: 20px;
     }
 
+    .iframe-title {
+        text-align: center;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
     iframe {
         width: 100%;
         height: 600px;
@@ -437,14 +497,6 @@
     .nav-link.active {
         background: var(--secondary-color);
         color: white !important;
-    }
-
-    /* Seção Sobre */
-    .about-section {
-        padding: 4rem 0;
-        margin: 4rem 0;
-        background: #f8f9fa;
-        border-radius: 20px;
     }
     </style>
 </head>
@@ -460,13 +512,13 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
-            <a href="#" class="logo">
-                <i class="fas fa-city"></i>
-                UrbanTech
+            <a href="#inicio" class="logo">
+                <i class="fas fa-tree"></i>
+                Parque Augusta Tech
             </a>
             <ul class="nav-menu">
-                <li><a href="#projetos" class="nav-link">Projetos</a></li>
-                <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li><a href="#galeria" class="nav-link">Galeria</a></li>
+                <li><a href="#sobre" class="nav-link">Sobre o Projeto</a></li>
                 <li><a href="#contato" class="nav-link">Contato</a></li>
             </ul>
         </nav>
@@ -475,147 +527,186 @@
     <!-- Conteúdo Principal -->
     <main class="main-content">
         <div class="container">
-            <!-- Seção Hero com ID -->
+            <!-- Seção Hero -->
             <section class="hero-section" id="inicio">
-                <h1>Engenharia Urbana Inteligente</h1>
-                <p>Soluções inovadoras para cidades do futuro</p>
+                <div class="hero-subtitle">Projeto de Extensão - Construindo Cidades</div>
+                <h1>Tecnologia para o Parque Augusta</h1>
+                <p>Engenharia da Computação aplicada à sustentabilidade urbana</p>
             </section>
 
-            <!-- Nova Seção Sobre -->
+            <!-- Seção Sobre -->
             <section class="about-section" id="sobre">
-                <h2>Sobre Nós</h2>
-                <p>Somos especialistas em desenvolvimento urbano sustentável...</p>
-                <!-- Adicione mais conteúdo aqui -->
+                <h2>Sobre o Projeto</h2>
+                <div class="about-content">
+                    <p>
+                        Somos estudantes de <span class="highlight">Engenharia da Computação</span> 
+                        participando do projeto de extensão <span class="highlight">"Construindo Cidades"</span>, 
+                        com foco em levar tecnologia sustentável para o Parque Augusta.
+                    </p>
+                    <p>
+                        O <span class="highlight">Parque Augusta</span> é um importante espaço verde 
+                        no coração de São Paulo, e nosso objetivo é desenvolver soluções tecnológicas 
+                        que promovam a sustentabilidade, melhorem a experiência dos visitantes e 
+                        contribuam para a preservação ambiental.
+                    </p>
+                    <p>
+                        Através da aplicação de <span class="highlight">IoT (Internet das Coisas)</span>, 
+                        <span class="highlight">sensores ambientais</span>, 
+                        <span class="highlight">análise de dados</span> e 
+                        <span class="highlight">automação inteligente</span>, 
+                        buscamos criar um parque mais conectado, eficiente e sustentável.
+                    </p>
+                </div>
+
+                <!-- Estatísticas do Projeto -->
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Tecnologias Aplicadas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Monitoramento</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Sustentável</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Possibilidades</div>
+                    </div>
+                </div>
             </section>
 
-            <!-- Galeria com ID -->
-            <div class="slideshow-container" id="projetos">
+            <!-- Galeria de Projetos -->
+            <div class="slideshow-container" id="galeria">
                 <div class="slideshow-inner">
                     <div class="slide active">
-                        <img data-src="img1.jpg" class="slide-image" alt="Projeto 1" loading="lazy" onclick="openModal('img1.jpg')">
+                        <img data-src="img1.jpg" class="slide-image" alt="Sensores IoT no Parque" loading="lazy" onclick="openModal('img1.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img2.jpg" class="slide-image" alt="Projeto 2" loading="lazy" onclick="openModal('img2.jpg')">
+                        <img data-src="img2.jpg" class="slide-image" alt="Sistema de Irrigação Inteligente" loading="lazy" onclick="openModal('img2.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img3.jpg" class="slide-image" alt="Projeto 3" loading="lazy" onclick="openModal('img3.jpg')">
+                        <img data-src="img3.jpg" class="slide-image" alt="Monitoramento Ambiental" loading="lazy" onclick="openModal('img3.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img4.jpg" class="slide-image" alt="Projeto 4" loading="lazy" onclick="openModal('img4.jpg')">
+                        <img data-src="img4.jpg" class="slide-image" alt="Painéis Solares Integrados" loading="lazy" onclick="openModal('img4.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img5.jpg" class="slide-image" alt="Projeto 5" loading="lazy" onclick="openModal('img5.jpg')">
+                        <img data-src="img5.jpg" class="slide-image" alt="App Mobile do Parque" loading="lazy" onclick="openModal('img5.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img6.jpg" class="slide-image" alt="Projeto 6" loading="lazy" onclick="openModal('img6.jpg')">
+                        <img data-src="img6.jpg" class="slide-image" alt="Dashboard de Controle" loading="lazy" onclick="openModal('img6.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img7.jpg" class="slide-image" alt="Projeto 7" loading="lazy" onclick="openModal('img7.jpg')">
+                        <img data-src="img7.jpg" class="slide-image" alt="Estações Meteorológicas" loading="lazy" onclick="openModal('img7.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img8.jpg" class="slide-image" alt="Projeto 8" loading="lazy" onclick="openModal('img8.jpg')">
+                        <img data-src="img8.jpg" class="slide-image" alt="Sistema de Iluminação LED" loading="lazy" onclick="openModal('img8.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img9.jpg" class="slide-image" alt="Projeto 9" loading="lazy" onclick="openModal('img9.jpg')">
+                        <img data-src="img9.jpg" class="slide-image" alt="Coletores de Dados" loading="lazy" onclick="openModal('img9.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img10.jpg" class="slide-image" alt="Projeto 10" loading="lazy" onclick="openModal('img10.jpg')">
+                        <img data-src="img10.jpg" class="slide-image" alt="Interface Web" loading="lazy" onclick="openModal('img10.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img11.jpg" class="slide-image" alt="Projeto 11" loading="lazy" onclick="openModal('img11.jpg')">
+                        <img data-src="img11.jpg" class="slide-image" alt="Análise de Tráfego" loading="lazy" onclick="openModal('img11.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img12.jpg" class="slide-image" alt="Projeto 12" loading="lazy" onclick="openModal('img12.jpg')">
+                        <img data-src="img12.jpg" class="slide-image" alt="Sistema de Segurança" loading="lazy" onclick="openModal('img12.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img13.jpg" class="slide-image" alt="Projeto 13" loading="lazy" onclick="openModal('img13.jpg')">
+                        <img data-src="img13.jpg" class="slide-image" alt="Gestão de Resíduos" loading="lazy" onclick="openModal('img13.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img14.jpg" class="slide-image" alt="Projeto 14" loading="lazy" onclick="openModal('img14.jpg')">
+                        <img data-src="img14.jpg" class="slide-image" alt="Realidade Aumentada" loading="lazy" onclick="openModal('img14.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img15.jpg" class="slide-image" alt="Projeto 15" loading="lazy" onclick="openModal('img15.jpg')">
+                        <img data-src="img15.jpg" class="slide-image" alt="Banco de Dados" loading="lazy" onclick="openModal('img15.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img16.jpg" class="slide-image" alt="Projeto 16" loading="lazy" onclick="openModal('img16.jpg')">
+                        <img data-src="img16.jpg" class="slide-image" alt="Machine Learning" loading="lazy" onclick="openModal('img16.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img17.jpg" class="slide-image" alt="Projeto 17" loading="lazy" onclick="openModal('img17.jpg')">
+                        <img data-src="img17.jpg" class="slide-image" alt="Conectividade 5G" loading="lazy" onclick="openModal('img17.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img18.jpg" class="slide-image" alt="Projeto 18" loading="lazy" onclick="openModal('img18.jpg')">
+                        <img data-src="img18.jpg" class="slide-image" alt="Automação Predial" loading="lazy" onclick="openModal('img18.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img19.jpg" class="slide-image" alt="Projeto 19" loading="lazy" onclick="openModal('img19.jpg')">
+                        <img data-src="img19.jpg" class="slide-image" alt="Drones de Monitoramento" loading="lazy" onclick="openModal('img19.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img20.jpg" class="slide-image" alt="Projeto 20" loading="lazy" onclick="openModal('img20.jpg')">
+                        <img data-src="img20.jpg" class="slide-image" alt="Blockchain Ambiental" loading="lazy" onclick="openModal('img20.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img21.jpg" class="slide-image" alt="Projeto 21" loading="lazy" onclick="openModal('img21.jpg')">
+                        <img data-src="img21.jpg" class="slide-image" alt="Edge Computing" loading="lazy" onclick="openModal('img21.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img22.jpg" class="slide-image" alt="Projeto 22" loading="lazy" onclick="openModal('img22.jpg')">
+                        <img data-src="img22.jpg" class="slide-image" alt="API Integração" loading="lazy" onclick="openModal('img22.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img23.jpg" class="slide-image" alt="Projeto 23" loading="lazy" onclick="openModal('img23.jpg')">
+                        <img data-src="img23.jpg" class="slide-image" alt="Cloud Computing" loading="lazy" onclick="openModal('img23.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img24.jpg" class="slide-image" alt="Projeto 24" loading="lazy" onclick="openModal('img24.jpg')">
+                        <img data-src="img24.jpg" class="slide-image" alt="Sensores de Solo" loading="lazy" onclick="openModal('img24.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img25.jpg" class="slide-image" alt="Projeto 25" loading="lazy" onclick="openModal('img25.jpg')">
+                        <img data-src="img25.jpg" class="slide-image" alt="Análise Preditiva" loading="lazy" onclick="openModal('img25.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img26.jpg" class="slide-image" alt="Projeto 26" loading="lazy" onclick="openModal('img26.jpg')">
+                        <img data-src="img26.jpg" class="slide-image" alt="Smart Grid" loading="lazy" onclick="openModal('img26.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img27.jpg" class="slide-image" alt="Projeto 27" loading="lazy" onclick="openModal('img27.jpg')">
+                        <img data-src="img27.jpg" class="slide-image" alt="Digital Twin" loading="lazy" onclick="openModal('img27.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img28.jpg" class="slide-image" alt="Projeto 28" loading="lazy" onclick="openModal('img28.jpg')">
+                        <img data-src="img28.jpg" class="slide-image" alt="Visão Computacional" loading="lazy" onclick="openModal('img28.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img29.jpg" class="slide-image" alt="Projeto 29" loading="lazy" onclick="openModal('img29.jpg')">
+                        <img data-src="img29.jpg" class="slide-image" alt="Processamento Natural" loading="lazy" onclick="openModal('img29.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img30.jpg" class="slide-image" alt="Projeto 30" loading="lazy" onclick="openModal('img30.jpg')">
+                        <img data-src="img30.jpg" class="slide-image" alt="Robótica Ambiental" loading="lazy" onclick="openModal('img30.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img31.jpg" class="slide-image" alt="Projeto 31" loading="lazy" onclick="openModal('img31.jpg')">
+                        <img data-src="img31.jpg" class="slide-image" alt="Inteligência Artificial" loading="lazy" onclick="openModal('img31.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img32.jpg" class="slide-image" alt="Projeto 32" loading="lazy" onclick="openModal('img32.jpg')">
+                        <img data-src="img32.jpg" class="slide-image" alt="Realidade Virtual" loading="lazy" onclick="openModal('img32.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img33.jpg" class="slide-image" alt="Projeto 33" loading="lazy" onclick="openModal('img33.jpg')">
+                        <img data-src="img33.jpg" class="slide-image" alt="Computação Quântica" loading="lazy" onclick="openModal('img33.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img34.jpg" class="slide-image" alt="Projeto 34" loading="lazy" onclick="openModal('img34.jpg')">
+                        <img data-src="img34.jpg" class="slide-image" alt="Bioinformática" loading="lazy" onclick="openModal('img34.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img35.jpg" class="slide-image" alt="Projeto 35" loading="lazy" onclick="openModal('img35.jpg')">
+                        <img data-src="img35.jpg" class="slide-image" alt="Nanotecnologia" loading="lazy" onclick="openModal('img35.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img36.jpg" class="slide-image" alt="Projeto 36" loading="lazy" onclick="openModal('img36.jpg')">
+                        <img data-src="img36.jpg" class="slide-image" alt="Cibersegurança" loading="lazy" onclick="openModal('img36.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img37.jpg" class="slide-image" alt="Projeto 37" loading="lazy" onclick="openModal('img37.jpg')">
+                        <img data-src="img37.jpg" class="slide-image" alt="DevOps Ambiental" loading="lazy" onclick="openModal('img37.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img38.jpg" class="slide-image" alt="Projeto 38" loading="lazy" onclick="openModal('img38.jpg')">
+                        <img data-src="img38.jpg" class="slide-image" alt="Big Data Analytics" loading="lazy" onclick="openModal('img38.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img39.jpg" class="slide-image" alt="Projeto 39" loading="lazy" onclick="openModal('img39.jpg')">
+                        <img data-src="img39.jpg" class="slide-image" alt="Microcontroladores" loading="lazy" onclick="openModal('img39.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img40.jpg" class="slide-image" alt="Projeto 40" loading="lazy" onclick="openModal('img40.jpg')">
+                        <img data-src="img40.jpg" class="slide-image" alt="Computação Verde" loading="lazy" onclick="openModal('img40.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img41.jpg" class="slide-image" alt="Projeto 41" loading="lazy" onclick="openModal('img41.jpg')">
+                        <img data-src="img41.jpg" class="slide-image" alt="Sistemas Embarcados" loading="lazy" onclick="openModal('img41.jpg')">
                     </div>
                     <div class="slide">
-                        <img data-src="img42.jpg" class="slide-image" alt="Projeto 42" loading="lazy" onclick="openModal('img42.jpg')">
+                        <img data-src="img42.jpg" class="slide-image" alt="Tecnologia Sustentável" loading="lazy" onclick="openModal('img42.jpg')">
                     </div>
                 </div>
                 
@@ -629,8 +720,9 @@
                 <div class="slideshow-dots"></div>
             </div>
 
-            <!-- Iframe mais destacado -->
+            <!-- Localização do Parque -->
             <div class="iframe-wrapper">
+                <div class="iframe-title">📍 Localização do Parque Augusta</div>
                 <iframe src="https://www.google.com/maps/embed?pb=!4v1747694251342!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREdwTEtJQmc.!2m2!1d-23.549961316668!2d-46.64915989497705!3f100.06136175360433!4f0!5f0.7820865974627469" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade">
@@ -643,18 +735,27 @@
     <footer id="contato">
         <div class="footer-content">
             <div class="footer-section">
+                <h3>Projeto Construindo Cidades</h3>
+                <p>Engenharia da Computação</p>
+                <p>Parque Augusta - São Paulo/SP</p>
+            </div>
+            <div class="footer-section">
                 <h3>Contato</h3>
-                <p>contato@urbantech.com</p>
+                <p>projeto.augusta@construindocidades.edu</p>
                 <p>+55 11 99999-9999</p>
             </div>
             <div class="footer-section">
-                <h3>Redes Sociais</h3>
+                <h3>Redes do Projeto</h3>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
+        </div>
+        <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
+            <p>&copy; 2024 Parque Augusta Tech - Projeto de Extensão Construindo Cidades</p>
         </div>
     </footer>
 
