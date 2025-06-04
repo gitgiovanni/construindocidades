@@ -1030,6 +1030,46 @@
     const newNavItem = document.createElement('li');
     newNavItem.innerHTML = '<a href="#sugestoes" class="nav-link">Sugestões</a>';
     navMenu.appendChild(newNavItem);
+
+           // Substitua pelo ID da sua planilha Google
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxZLUwu4PS2NA8KpOyTA0EYPmrF7f922KVyizc2sQiQx9OERkQmQuzUDVrht2qhpZ11EA/exec';
+
+suggestionForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    if (!typeInput.value) {
+        alert('Por favor, selecione um tipo de sugestão');
+        return;
+    }
+
+    // Mostrar loading
+    const submitBtn = document.querySelector('.submit-btn');
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    submitBtn.disabled = true;
+
+    try {
+        const formData = new FormData(suggestionForm);
+        
+        const response = await fetch(scriptURL, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            confirmationMessage.style.display = 'block';
+            suggestionForm.reset();
+            typeOptions.forEach(opt => opt.classList.remove('selected'));
+        } else {
+            throw new Error('Erro no envio');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Ocorreu um erro ao enviar. Tente novamente.');
+    } finally {
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Sugestão';
+        submitBtn.disabled = false;
+    }
+});
     </script>
     <script>
     // Scroll suave e navegação ativa
